@@ -1,0 +1,43 @@
+.root {
+    -fx-background-color: #2f3640; /* Dark Slate */
+    -fx-font-family: “Segoe UI”, Helvetica, Arial, sans-serif;
+}
+
+/* The Drawing Canvas Container */
+.canvas-container {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #718093;
+    -fx-border-width: 2;
+    -fx-background-radius: 5;
+}
+
+/* Buttons – Flat */
+.button {
+    -fx-background-color: #718093; /* Muted Grey-Blue */
+    -fx-text-fill: white;
+    -fx-background-radius: 3;
+    -fx-padding: 8 15 8 15;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #40739e; /* Slightly brighter blue on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #2f3640;
+}
+
+/* ComboBox and ColorPicker */
+.combo-box, .color-picker {
+    -fx-background-color: #f5f6fa;
+    -fx-border-color: #dcdde1;
+    -fx-border-radius: 3;
+}
+
+/* Sidebar/Toolbar Area */
+.toolbar {
+    -fx-background-color: #353b48;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}

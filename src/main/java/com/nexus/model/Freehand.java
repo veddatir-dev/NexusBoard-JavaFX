@@ -12,7 +12,7 @@ import java.util.Map;
 public class Freehand implements iShape {
     
     // We use a List because we don’t know how many points the user will draw
-// We use a List because we don’t know how many points the user will draw.
+
     // Double is used for high precision coordinates on the Canvas.
     private List<Double> xPoints = new ArrayList<>();
     private List<Double> yPoints = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Freehand implements iShape {
     
     @Override
 	public void setColor(Color color) {
-		// TODO Auto-generated method stub
+		
 		this.color=color;
 	}
     @Override
@@ -39,7 +39,7 @@ public class Freehand implements iShape {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(color);
-        gc.setLineWidth(2); // You can make this a variable later for a “Brush Size”
+        gc.setLineWidth(2); 
 
         // Step 1: Tell the “pen” to start a new path
         gc.beginPath();

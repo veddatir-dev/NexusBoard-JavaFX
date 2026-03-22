@@ -9,17 +9,23 @@ import javafx.stage.Stage;
 public class Paint extends Application {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
+		
 		Parent root=FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
-		primaryStage.setScene(new Scene(root));
-		primaryStage.setTitle("Nexus Board");
-		primaryStage.show();
+		Scene scene = new Scene(root);
+	    
+	    // link CSS
+	    scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+	    
+	    primaryStage.setScene(scene);
+	    primaryStage.setTitle("Nexus Board");
+	    primaryStage.show();
+
 	}
 
 }
