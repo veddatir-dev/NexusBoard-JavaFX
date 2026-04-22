@@ -2,88 +2,248 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nexus.controller.FXMLDocumentController">
-   <children>
-      <GridPane layoutY="-1.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1000.0" minWidth="10.0" prefWidth="1000.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="0.0" prefWidth="0.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="400.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1400.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nexus.controller.FXMLDocumentController">
+
+   <!-- Top Toolbar with Enhanced Controls -->
+   <top>
+      <VBox styleClass="toolbar" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <!-- First Toolbar Row: File, Edit, and Theme -->
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="toolbar-content">
                <children>
-                  <ComboBox fx:id="ShapeBox" prefWidth="284.0" promptText="Shapes">
-                     <HBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </HBox.margin>
-                  </ComboBox>
-                  <ColorPicker fx:id="ColorBox" prefWidth="284.0" promptText="Colors">
-                     <HBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </HBox.margin>
-                  </ColorPicker>
-                  <Button fx:id="MoveBtn" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="143.0" text="Move">
-                     <HBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="CopyBtn" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="143.0" text="Copy">
-                     <HBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="ResizeBtn" mnemonicParsing="false" onAction="#handleButtonAction" prefWidth="144.0" text="Resize">
-                     <HBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </HBox.margin>
+                  <!-- File Operations -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="section-label" text="File" />
+                        <HBox spacing="5.0">
+                           <children>
+                              <Button fx:id="SaveProjectBtn" mnemonicParsing="false" onAction="#handleSaveProject" styleClass="modern-button" text="💾 Save" minWidth="60.0">
+                                 <tooltip><Tooltip text="Save project file" /></tooltip>
+                              </Button>
+                              <Button fx:id="LoadProjectBtn" mnemonicParsing="false" onAction="#handleLoadProject" styleClass="modern-button" text="📂 Open" minWidth="60.0">
+                                 <tooltip><Tooltip text="Open project file" /></tooltip>
+                              </Button>
+                              <Button fx:id="ExportBtn" mnemonicParsing="false" onAction="#handleExport" styleClass="modern-button" text="📤 Export" minWidth="60.0">
+                                 <tooltip><Tooltip text="Export to image" /></tooltip>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <!-- Edit Tools -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="section-label" text="Edit" />
+                        <HBox spacing="5.0">
+                           <children>
+                              <Button fx:id="UndoBtn" mnemonicParsing="false" onAction="#handleUndo" styleClass="modern-button" text="↶ Undo" minWidth="50.0">
+                                 <tooltip><Tooltip text="Undo last action" /></tooltip>
+                              </Button>
+                              <Button fx:id="RedoBtn" mnemonicParsing="false" onAction="#handleRedo" styleClass="modern-button" text="↷ Redo" minWidth="50.0">
+                                 <tooltip><Tooltip text="Redo last action" /></tooltip>
+                              </Button>
+                              <Button fx:id="ClearBtn" mnemonicParsing="false" onAction="#handleClear" styleClass="modern-button" text="🗑 Clear" minWidth="50.0">
+                                 <tooltip><Tooltip text="Clear all drawings" /></tooltip>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <!-- Theme Selector -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="section-label" text="Theme" />
+                        <ComboBox fx:id="ThemeBox" prefWidth="140.0" promptText="Select Theme" styleClass="modern-combo" />
+                     </children>
+                  </VBox>
+
+                  <!-- Exit Button -->
+                  <Button fx:id="ExitBtn" mnemonicParsing="false" onAction="#handleExit" styleClass="exit-button" text="✕ Exit">
+                     <tooltip><Tooltip text="Exit application" /></tooltip>
                   </Button>
                </children>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </padding>
             </HBox>
-            <SplitPane dividerPositions="0.8004807692307692" prefHeight="160.0" prefWidth="200.0" GridPane.rowIndex="1">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                     <children>
-                        <Canvas fx:id="CanvasBox" height="400.0" layoutX="-2.0" layoutY="-1.0" onMousePressed="#startDrag" onMouseDragged="#whileDragging" onMouseReleased="#endDrag" width="800.0" />
-                     </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                     <children>
-                        <ListView fx:id="ShapeList" layoutX="-1.0" layoutY="2.0" prefHeight="389.0" prefWidth="198.0" />
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
+
+            <Separator prefWidth="200.0" />
+
+            <!-- Second Toolbar Row: Drawing Tools -->
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="toolbar-content">
                <children>
-                  <Button fx:id="LoadBtn" mnemonicParsing="false" onAction="#handleButtonAction" text="Load" />
-                  <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#handleButtonAction" text="Save" />
-                  <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#handleButtonAction" text="Delete" />
-                  <Button fx:id="UndoBtn" mnemonicParsing="false" onAction="#handleButtonAction" text="Undo" />
-                  <Button fx:id="RedoBtn" mnemonicParsing="false" onAction="#handleButtonAction" text="Redo" />
-                  <Button fx:id="ClearBtn" mnemonicParsing="false" onAction="#handleButtonAction" text="Clear" />
-                  <Button fx:id="ExitBtn" mnemonicParsing="false" onAction="#handleButtonAction" text="Exit" />
+                  <!-- Shape Selection -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="section-label" text="Shapes" />
+                        <HBox spacing="5.0">
+                           <children>
+                              <ComboBox fx:id="ShapeBox" prefWidth="120.0" promptText="Shape" styleClass="modern-combo" />
+                              <ColorPicker fx:id="ColorBox" prefWidth="50.0" styleClass="modern-color-picker" />
+                              <ColorPicker fx:id="FillColorBox" prefWidth="50.0" styleClass="modern-color-picker" />
+                              <Slider fx:id="StrokeSizeSlider" max="20.0" min="1.0" prefWidth="80.0" styleClass="modern-slider" value="2.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <!-- New Drawing Tools -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="section-label" text="Tools" />
+                        <HBox spacing="5.0">
+                           <children>
+                              <Button fx:id="TextBtn" mnemonicParsing="false" onAction="#handleTextTool" styleClass="modern-button" text="📝 Text" minWidth="50.0">
+                                 <tooltip><Tooltip text="Add text to canvas" /></tooltip>
+                              </Button>
+                              <Button fx:id="EraserBtn" mnemonicParsing="false" onAction="#handleEraserTool" styleClass="modern-button" text="🧹 Eraser" minWidth="50.0">
+                                 <tooltip><Tooltip text="Erase parts of drawing" /></tooltip>
+                              </Button>
+                              <Button fx:id="SelectionBtn" mnemonicParsing="false" onAction="#handleSelectionTool" styleClass="modern-button" text="✓ Select" minWidth="50.0">
+                                 <tooltip><Tooltip text="Select shapes" /></tooltip>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <!-- Transformation Controls -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="section-label" text="Transform" />
+                        <HBox spacing="5.0">
+                           <children>
+                              <VBox spacing="2.0" prefWidth="70.0">
+                                 <children>
+                                    <Label styleClass="control-label" text="Rotate" />
+                                    <Slider fx:id="RotationSlider" min="0.0" max="360.0" styleClass="modern-slider" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="2.0" prefWidth="70.0">
+                                 <children>
+                                    <Label styleClass="control-label" text="Scale" />
+                                    <Slider fx:id="ScaleSlider" min="0.1" max="2.0" value="1.0" styleClass="modern-slider" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+
+                  <!-- Network & AI -->
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label styleClass="section-label" text="Network" />
+                        <HBox spacing="5.0">
+                           <children>
+                              <TextField fx:id="IPField" promptText="IP" prefWidth="100.0" styleClass="modern-text-field" />
+                              <Button fx:id="HostBtn" mnemonicParsing="false" onAction="#handleHost" styleClass="modern-button" text="Host" minWidth="50.0" />
+                              <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#handleConnect" styleClass="modern-button" text="Connect" minWidth="50.0" />
+                              <Button fx:id="AIBtn" mnemonicParsing="false" onAction="#handleAIEnhance" styleClass="modern-button" text="🎨 AI" minWidth="45.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </padding>
             </HBox>
          </children>
-      </GridPane>
-   </children>
-</AnchorPane>
+      </VBox>
+   </top>
+
+   <!-- Center: Canvas with Side Panels -->
+   <center>
+      <SplitPane dividerPositions="0.75, 0.85" styleClass="main-split-pane">
+         <items>
+            <!-- Main Canvas Area -->
+            <AnchorPane styleClass="canvas-container" minHeight="0.0" minWidth="0.0">
+               <children>
+                  <Canvas fx:id="CanvasBox" onMousePressed="#startDrag" onMouseDragged="#whileDragging" onMouseReleased="#endDrag" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </AnchorPane>
+
+            <!-- Right Sidebar: Layers and History -->
+            <VBox styleClass="sidebar" spacing="10.0" minWidth="200.0">
+               <children>
+                  <!-- Layers Section -->
+                  <TitledPane animated="false" collapsible="false" text="Layers" textFill="#00d4ff">
+                     <content>
+                        <VBox spacing="5.0">
+                           <children>
+                              <ListView fx:id="LayerList" prefHeight="120.0" styleClass="shape-list" />
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Button fx:id="AddLayerBtn" mnemonicParsing="false" onAction="#handleAddLayer" styleClass="sidebar-button" text="+" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="DeleteLayerBtn" mnemonicParsing="false" onAction="#handleDeleteLayer" styleClass="sidebar-button" text="-" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="LayerUpBtn" mnemonicParsing="false" onAction="#handleLayerUp" styleClass="sidebar-button" text="↑" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="LayerDownBtn" mnemonicParsing="false" onAction="#handleLayerDown" styleClass="sidebar-button" text="↓" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+
+                  <!-- Shape History Section -->
+                  <TitledPane animated="false" collapsible="false" text="Shape History" textFill="#00d4ff">
+                     <content>
+                        <ListView fx:id="ShapeList" prefHeight="120.0" styleClass="shape-list" />
+                     </content>
+                  </TitledPane>
+
+                  <!-- Transform Options -->
+                  <TitledPane animated="false" collapsible="false" text="Selected Shape" textFill="#00d4ff">
+                     <content>
+                        <VBox spacing="8.0">
+                           <children>
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Button fx:id="MoveBtn" mnemonicParsing="false" onAction="#handleButtonAction" styleClass="sidebar-button" text="Move" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="CopyBtn" mnemonicParsing="false" onAction="#handleButtonAction" styleClass="sidebar-button" text="Copy" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Button fx:id="ResizeBtn" mnemonicParsing="false" onAction="#handleButtonAction" styleClass="sidebar-button" text="Resize" HBox.hgrow="ALWAYS" />
+                                    <Button fx:id="DeleteShapeBtn" mnemonicParsing="false" onAction="#handleDeleteShape" styleClass="sidebar-button" text="Delete" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </items>
+      </SplitPane>
+   </center>
+
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="status-bar">
+         <children>
+            <Label fx:id="StatusLabel" styleClass="status-text" text="Ready - Nexus Board v3.0" HBox.hgrow="ALWAYS" />
+            <Label styleClass="status-info" text="Zoom: 100%" />
+            <Label styleClass="status-info" text="Layers: 1" />
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+         </padding>
+      </HBox>
+   </bottom>
+
+</BorderPane>

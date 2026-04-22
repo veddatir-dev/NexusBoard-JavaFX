@@ -1,45 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.nexus</groupId>
   <artifactId>Board</artifactId>
-  <version>3.0.0</version>
   <name>Nexus Board Drawing Application</name>
+  <version>3.0.0</version>
   <description>Professional collaborative drawing application with JavaFX</description>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <javafx.version>21</javafx.version>
-    <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
-  </properties>
-
-  <dependencies>
-    <!-- JavaFX Core Dependencies -->
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>${javafx.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-fxml</artifactId>
-      <version>${javafx.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-graphics</artifactId>
-      <version>${javafx.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-swing</artifactId>
-      <version>${javafx.version}</version>
-    </dependency>
-  </dependencies>
-
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <resources>
@@ -47,11 +13,8 @@
         <directory>src/main/resources</directory>
       </resource>
     </resources>
-
     <plugins>
-      <!-- Java Compiler Plugin -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
@@ -60,10 +23,7 @@
           <release>17</release>
         </configuration>
       </plugin>
-
-      <!-- Maven Shade Plugin - Creates Fat JAR with all dependencies -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.5.0</version>
         <executions>
@@ -73,29 +33,23 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <!-- Output JAR filename -->
               <finalName>NexusBoard-${project.version}</finalName>
               <shadedArtifactAttached>false</shadedArtifactAttached>
               <transformers>
-                <!-- Set main class in manifest -->
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <transformer>
                   <mainClass>com.nexus.controller.Starter</mainClass>
                 </transformer>
-                <!-- Handle service providers (for JavaFX modules) -->
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                <!-- Merge multiple spring configs if needed -->
-                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                <transformer />
+                <transformer>
                   <resource>META-INF/spring.handlers</resource>
                 </transformer>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                <transformer>
                   <resource>META-INF/spring.schemas</resource>
                 </transformer>
               </transformers>
-              <!-- Include all dependencies in final JAR -->
               <filters>
                 <filter>
                   <artifact>*:*</artifact>
-                  <!-- Exclude unnecessary files from bundled libraries -->
                   <excludes>
                     <exclude>META-INF/*.SF</exclude>
                     <exclude>META-INF/*.DSA</exclude>
@@ -105,18 +59,13 @@
                   </excludes>
                 </filter>
               </filters>
-              <!-- Minimize JAR by removing unused classes (optional, set to true to enable) -->
               <minimizeJar>false</minimizeJar>
-              <!-- Create a second shaded JAR with classifier 'executable' -->
               <shadedClassifierName>executable</shadedClassifierName>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
-      <!-- Maven JAR Plugin - Creates standard JAR -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.3.0</version>
         <configuration>
@@ -128,29 +77,18 @@
           </archive>
         </configuration>
       </plugin>
-
-      <!-- Clean Plugin to remove build artifacts -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
         <version>3.3.1</version>
       </plugin>
-
-      <!-- Install Plugin -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
         <version>3.1.1</version>
       </plugin>
-
-      <!-- Surefire Plugin for running tests -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.1.2</version>
       </plugin>
-
-      <!-- JavaFX Maven Plugin (for development/testing) -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -161,4 +99,11 @@
       </plugin>
     </plugins>
   </build>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javafx.version>21</javafx.version>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+  </properties>
 </project>

@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 public abstract class Shape implements iShape {
 	protected double x1,y1,x2,y2;
 	protected Color color;
+	protected Color fillColor = Color.TRANSPARENT;
+	protected double strokeWidth = 2.0;
 	
 	public void setPoints(double x1,double y1,double x2,double y2) {
 		this.x1=x1;
@@ -15,5 +17,13 @@ public abstract class Shape implements iShape {
 	@Override
 	public void setColor(Color color) {
 		this.color=color;
+	}
+	
+	public void setFillColor(Color fillColor) {
+		this.fillColor = fillColor;
+	}
+	
+	public void setStrokeWidth(double strokeWidth) {
+		this.strokeWidth = strokeWidth;
 	}
 }

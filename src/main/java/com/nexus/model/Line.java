@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Line extends Shape {
 
@@ -12,7 +13,7 @@ public class Line extends Shape {
 	public void draw(Canvas canvas) {
 		GraphicsContext gc=canvas.getGraphicsContext2D();
 		gc.setStroke(color);
-		gc.setLineWidth(2);
+		gc.setLineWidth(strokeWidth > 0 ? strokeWidth : 2);
 		gc.strokeLine(x1, y1, x2, y2);
 	}
 
@@ -23,6 +24,11 @@ public class Line extends Shape {
 		props.put("y1", y1);
 		props.put("x2", x2);
 		props.put("y2", y2);
+		props.put("r", color.getRed());
+		props.put("g", color.getGreen());
+		props.put("b", color.getBlue());
+		props.put("a", color.getOpacity());
+		props.put("strokeWidth", strokeWidth);
 		return props;
 	}
 
@@ -32,6 +38,12 @@ public class Line extends Shape {
 		this.y1=props.get("y1");
 		this.x2=props.get("x2");
 		this.y2=props.get("y2");
+		double r = props.get("r");
+		double g = props.get("g");
+		double b = props.get("b");
+		double a = props.get("a");
+		this.color = Color.color(r, g, b, a);
+		this.strokeWidth = props.getOrDefault("strokeWidth", 2.0);
 	}
 	
 }

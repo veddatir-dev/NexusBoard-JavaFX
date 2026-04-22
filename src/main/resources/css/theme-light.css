@@ -1,0 +1,187 @@
+/* Modern Light Theme for Nexus Board */
+
+.root {
+    -fx-background-color: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+    -fx-font-family: "Segoe UI", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* Toolbar Styling - Light */
+.toolbar {
+    -fx-background-color: linear-gradient(to right, #ffffff 0%, #f8f9fa 100%);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 2, 0, 0, 1);
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 0 0 1 0;
+}
+
+.toolbar-content {
+    -fx-background-color: transparent;
+}
+
+.section-label {
+    -fx-text-fill: #212529;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+    -fx-text-transform: uppercase;
+    -fx-letter-spacing: 0.5px;
+}
+
+.control-label {
+    -fx-text-fill: #495057;
+    -fx-font-size: 11px;
+    -fx-font-weight: 500;
+}
+
+/* Modern Button Styling - Light */
+.modern-button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 10 16 10 16;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,123,255,0.2), 2, 0, 0, 1);
+}
+
+.modern-button:hover {
+    -fx-background-color: #0056b3;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,123,255,0.4), 3, 0, 0, 2);
+}
+
+.modern-button:pressed {
+    -fx-background-color: #003d82;
+}
+
+.exit-button {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 10 16 10 16;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+}
+
+.exit-button:hover {
+    -fx-background-color: #c82333;
+}
+
+/* ComboBox and Controls */
+.modern-combo {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: #212529;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 12px;
+}
+
+.modern-combo:hover {
+    -fx-border-color: #007bff;
+}
+
+.modern-color-picker {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.modern-text-field {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 8 12 8 12;
+    -fx-text-fill: #212529;
+    -fx-font-size: 12px;
+    -fx-prompt-text-fill: #868e96;
+}
+
+.modern-text-field:focused {
+    -fx-border-color: #007bff;
+    -fx-border-width: 2;
+}
+
+/* Canvas Container */
+.canvas-container {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 4, 0, 0, 2);
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 0 0 0 1;
+}
+
+.sidebar-title {
+    -fx-text-fill: #212529;
+    -fx-font-weight: bold;
+}
+
+.shape-list {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+}
+
+.shape-list .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #212529;
+}
+
+.shape-list .list-cell:selected {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+/* Status Bar */
+.status-bar {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #dee2e6;
+}
+
+.status-text {
+    -fx-text-fill: #495057;
+}
+
+.status-info {
+    -fx-text-fill: #007bff;
+    -fx-font-weight: bold;
+}
+
+/* Slider */
+.modern-slider .track {
+    -fx-background-color: #dee2e6;
+}
+
+.modern-slider .thumb {
+    -fx-background-color: #007bff;
+}
+
+.modern-slider .thumb:hover {
+    -fx-background-color: #0056b3;
+}
+
+/* Scroll Bar */
+.scroll-bar .thumb {
+    -fx-background-color: #dee2e6;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #adb5bd;
+}
+
+/* Tooltip */
+.tooltip {
+    -fx-background-color: #343a40;
+    -fx-text-fill: white;
+}

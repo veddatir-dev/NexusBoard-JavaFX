@@ -3,7 +3,7 @@ package com.nexus.model;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +17,7 @@ public class Freehand implements iShape {
     private List<Double> xPoints = new ArrayList<>();
     private List<Double> yPoints = new ArrayList<>();
     private Color color;
+    private double strokeWidth = 2.0;
 
     /**
      * This method is called by the Controller EVERY TIME the mouse moves
@@ -32,6 +33,10 @@ public class Freehand implements iShape {
 		
 		this.color=color;
 	}
+	
+	public void setStrokeWidth(double strokeWidth) {
+		this.strokeWidth = strokeWidth;
+	}
     @Override
     public void draw(Canvas canvas) {
         // We need at least 2 points to draw a line segment
@@ -39,7 +44,7 @@ public class Freehand implements iShape {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(color);
-        gc.setLineWidth(2); 
+        gc.setLineWidth(strokeWidth); 
 
         // Step 1: Tell the “pen” to start a new path
         gc.beginPath();
@@ -67,7 +72,11 @@ public class Freehand implements iShape {
         for (int i = 0; i < xPoints.size(); i++) {
             props.put("x" + i, xPoints.get(i));
             props.put("y" + i, yPoints.get(i));
-        }
+        }        props.put("r", color.getRed());
+        props.put("g", color.getGreen());
+        props.put("b", color.getBlue());
+        props.put("a", color.getOpacity());
+        props.put("strokeWidth", strokeWidth);
         return props;
     }
 
@@ -81,7 +90,19 @@ public class Freehand implements iShape {
         for (int i = 0; i < count; i++) {
             xPoints.add(props.get("x" + i));
             yPoints.add(props.get("y" + i));
+        }        double r = props.get("r");
+        double g = props.get("g");
+        double b = props.get("b");
+        double a = props.get("a");
+        this.color = Color.color(r, g, b, a);
+        this.strokeWidth = props.getOrDefault("strokeWidth", 2.0);
+    }
+    public List<Point2D> getPointList() {
+        List<Point2D> points = new ArrayList<>();
+        for (int i = 0; i < xPoints.size(); i++) {
+            points.add(new Point2D(xPoints.get(i), yPoints.get(i)));
         }
+        return points;
     }
 
 	

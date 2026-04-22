@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import java.net.URL;
 
 public class Paint extends Application {
 
@@ -15,17 +16,25 @@ public class Paint extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		Parent root=FXMLLoader.load(getClass().getResource("/fxml/MainView.fxml"));
-		Scene scene = new Scene(root);
+	    // This tells Java to look inside the "resources" folder for the fxml subfolder
+	    URL fxmlLocation = getClass().getResource("/fxml/MainView.fxml");
 	    
-	    // link CSS
-	    scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-	    
-	    primaryStage.setScene(scene);
-	    primaryStage.setTitle("Nexus Board");
-	    primaryStage.show();
+	    if (fxmlLocation == null) {
+	        throw new RuntimeException("Critical Error: /fxml/MainView.fxml not found in resources!");
+	    }
 
+	    Parent root = FXMLLoader.load(fxmlLocation);
+	    Scene scene = new Scene(root);
+
+	    // Load the CSS similarly
+	    URL cssLocation = getClass().getResource("/css/style.css");
+	    if (cssLocation != null) {
+	        scene.getStylesheets().add(cssLocation.toExternalForm());
+	    }
+
+	    primaryStage.setTitle("Nexus Board v2.0 - AI-Enhanced Collaborative Drawing");
+	    primaryStage.setScene(scene);
+	    primaryStage.show();
 	}
 
 }
