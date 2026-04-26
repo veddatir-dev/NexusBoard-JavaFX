@@ -1,0 +1,212 @@
+/* Deep Gray & Cyan Theme - Professional */
+.root {
+    -fx-background-color: #1e1e1e;
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.toolbar {
+    -fx-background-color: #242424;
+    -fx-border-color: transparent transparent #333333 transparent;
+    -fx-border-width: 1;
+}
+
+.toolbar-content {
+    -fx-spacing: 20;
+    -fx-alignment: center-left;
+}
+
+.section-label {
+    -fx-text-fill: #888888;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-transform: uppercase;
+}
+
+.control-label {
+    -fx-text-fill: #aaaaaa;
+    -fx-font-size: 10px;
+}
+
+.modern-button {
+    -fx-background-color: #333333;
+    -fx-text-fill: #eeeeee;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 6 12 6 12;
+    -fx-cursor: hand;
+    -fx-border-color: #444444;
+}
+
+.modern-button:hover {
+    -fx-background-color: #00e5ff;
+    -fx-text-fill: #111111;
+    -fx-border-color: #00e5ff;
+}
+
+.modern-button:pressed {
+    -fx-background-color: #00aacc;
+}
+
+.tool-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 18px;
+    -fx-padding: 8;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+}
+
+.tool-button:hover {
+    -fx-background-color: #333333;
+}
+
+
+.exit-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff4444;
+    -fx-border-color: #ff4444;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 6 15 6 15;
+    -fx-cursor: hand;
+}
+
+.exit-button:hover {
+    -fx-background-color: #ff4444;
+    -fx-text-fill: white;
+}
+
+.modern-combo {
+    -fx-background-color: #333333;
+    -fx-border-color: #444444;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.modern-combo .list-cell {
+    -fx-text-fill: #eeeeee;
+}
+
+.modern-combo:hover {
+    -fx-border-color: #00d4ff;
+}
+
+.modern-color-picker {
+    -fx-background-color: #333333;
+    -fx-border-color: #444444;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.modern-color-picker:hover {
+    -fx-border-color: #00d4ff;
+}
+
+.modern-slider .track {
+    -fx-background-color: #444444;
+}
+
+.modern-slider .thumb {
+    -fx-background-color: #00d4ff;
+}
+
+.modern-slider .thumb:hover {
+    -fx-background-color: #ffffff;
+}
+
+.modern-text-field {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #444444;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 5 8 5 8;
+}
+
+.modern-text-field:focused {
+    -fx-border-color: #00d4ff;
+}
+
+.main-split-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.main-split-pane *.split-pane-divider {
+    -fx-background-color: #333333;
+    -fx-padding: 0 1 0 1;
+}
+
+.canvas-container {
+    -fx-background-color: #121212;
+}
+
+.sidebar {
+    -fx-background-color: #242424;
+    -fx-border-color: transparent transparent transparent #333333;
+    -fx-border-width: 1;
+}
+
+.sidebar-button {
+    -fx-background-color: #333333;
+    -fx-text-fill: #eeeeee;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #00d4ff;
+    -fx-text-fill: #111111;
+}
+
+.shape-list {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #333333;
+    -fx-control-inner-background: #1a1a1a;
+}
+
+.shape-list .list-cell {
+    -fx-text-fill: #dddddd;
+    -fx-padding: 5;
+}
+
+.shape-list .list-cell:filled:hover {
+    -fx-background-color: #333333;
+}
+
+.shape-list .list-cell:filled:selected {
+    -fx-background-color: #00d4ff;
+    -fx-text-fill: #111111;
+}
+
+.titled-pane {
+    -fx-text-fill: #00d4ff;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #333333;
+    -fx-font-weight: bold;
+}
+
+.titled-pane > .content {
+    -fx-background-color: #242424;
+    -fx-border-color: #333333;
+}
+
+.status-bar {
+    -fx-background-color: #00d4ff;
+    -fx-text-fill: #111111;
+}
+
+.status-text {
+    -fx-text-fill: #111111;
+    -fx-font-weight: bold;
+}
+
+.status-info {
+    -fx-text-fill: #333333;
+    -fx-font-size: 11px;
+}

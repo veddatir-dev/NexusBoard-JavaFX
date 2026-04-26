@@ -75,6 +75,11 @@ public class ProjectManager {
                 layerManager.deleteLayer(layerManager.getLayerCount() - 1);
             }
             layerManager.createLayer(layer.getName());
+            
+            // Re-draw required for loaded objects
+            for (iShape shape : layer.getShapes()) {
+                // we will rely on UI controller to call redraw.
+            }
         }
     }
 

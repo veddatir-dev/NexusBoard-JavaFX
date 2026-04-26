@@ -5,12 +5,10 @@ package com.nexus.view;
  */
 public class ThemeManager {
     
-    public static final String LIGHT_THEME = "light";
-    public static final String DARK_THEME = "dark";
-    public static final String PROFESSIONAL_THEME = "professional";
-    public static final String MODERN_THEME = "modern";
+    public static final String PROFESSIONAL_DARK = "Professional Dark";
+    public static final String LIGHT_MODERN = "Light Modern";
     
-    private static String currentTheme = PROFESSIONAL_THEME;
+    private static String currentTheme = PROFESSIONAL_DARK;
 
     /**
      * Get the CSS URL for the current theme
@@ -23,20 +21,15 @@ public class ThemeManager {
      * Get the CSS URL for a specific theme
      */
     public static String getThemeCSS(String theme) {
-        String cssFile = "/css/style.css";
+        String cssFile = "/css/professional-dark.css";
         
-        switch (theme.toLowerCase()) {
-            case LIGHT_THEME:
-                cssFile = "/css/theme-light.css";
+        switch (theme) {
+            case LIGHT_MODERN:
+                cssFile = "/css/light-modern.css";
                 break;
-            case DARK_THEME:
-                cssFile = "/css/theme-dark.css";
-                break;
-            case PROFESSIONAL_THEME:
-                cssFile = "/css/theme-professional.css";
-                break;
-            case MODERN_THEME:
-                cssFile = "/css/theme-modern.css";
+            case PROFESSIONAL_DARK:
+            default:
+                cssFile = "/css/professional-dark.css";
                 break;
         }
         
@@ -61,6 +54,6 @@ public class ThemeManager {
      * Get all available themes
      */
     public static String[] getAvailableThemes() {
-        return new String[]{LIGHT_THEME, DARK_THEME, PROFESSIONAL_THEME, MODERN_THEME};
+        return new String[]{PROFESSIONAL_DARK, LIGHT_MODERN};
     }
 }

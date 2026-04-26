@@ -3,35 +3,16 @@ package com.nexus.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.canvas.GraphicsContext;
-
-public class Square extends Rectangle {
+public abstract class Quadrilateral extends Shape {
 	private static final long serialVersionUID = 1L;
-
-    @Override
-    protected void drawShape(GraphicsContext gc) {
-        double Upperx = Math.min(x2, x1);
-        double Uppery = Math.min(y2, y1);
-
-        double Width = Math.abs(x2 - x1);
-        double Height = Math.abs(y2 - y1);
-        double side = Math.min(Width, Height); // Make it square
-        
-        if (fillA > 0.0) {
-            gc.fillRect(Upperx, Uppery, side, side);
-        }
-        gc.strokeRect(Upperx, Uppery, side, side);
-    }
 
     @Override
     public Map<String, Double> getProperties() {
         Map<String, Double> props = new HashMap<>();
-        double Upperx = Math.min(x2, x1);
-        double Uppery = Math.min(y2, y1);
-        double side = Math.min(Math.abs(x2 - x1), Math.abs(y2 - y1));
-        props.put("Upperx", Upperx);
-        props.put("Uppery", Uppery);
-        props.put("Side", side);
+        props.put("Upperx", Math.min(x2, x1));
+        props.put("Uppery", Math.min(y2, y1));
+        props.put("Width", Math.abs(x2 - x1));
+        props.put("Height", Math.abs(y2 - y1));
         props.put("r", r);
         props.put("g", g);
         props.put("b", b);
@@ -52,9 +33,8 @@ public class Square extends Rectangle {
     public void setProperties(Map<String, Double> props) {
         this.x1 = props.get("Upperx");
         this.y1 = props.get("Uppery");
-        double side = props.get("Side");
-        this.x2 = x1 + side;
-        this.y2 = y1 + side;
+        this.x2 = props.get("Width") + x1;
+        this.y2 = props.get("Height") + y1;
         this.r = props.get("r");
         this.g = props.get("g");
         this.b = props.get("b");

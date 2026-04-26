@@ -7,4 +7,5 @@ public interface NetworkCallback {
     void addExternalShape(iShape shape);
     void clearAllShapes();
     void undoLastShape();
+    void updateText(String type, String text);
 }

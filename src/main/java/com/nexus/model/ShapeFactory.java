@@ -23,12 +23,33 @@ public static iShape getShape(String shapeType) {
                 return new Rectangle();
             case "square":
                 return new Square();
+            case "parallelogram":
+                return new Parallelogram();
+            case "rhombus":
+                return new Rhombus();
+            case "trapezoid":
+                return new Trapezoid();
             case "circle":
                 return new Circle();
             case "ellipse":
                 return new Ellipse();
             case "triangle":
-                return new Triangle();
+                return new IsoscelesTriangle(); // Default to Isosceles for generic 'triangle'
+            case "equilateraltriangle":
+                return new EquilateralTriangle();
+            case "isoscelestriangle":
+                return new IsoscelesTriangle();
+            case "righttriangle":
+                return new RightTriangle();
+            case "umlclass":
+                return new UMLClassShape();
+            case "decision":
+                return new DecisionShape();
+            case "actor":
+                return new ActorShape();
+            case "connector":
+            case "connectorline":
+                return new ConnectorLine();
             case "freehand":
                 return new Freehand();
             case "text":

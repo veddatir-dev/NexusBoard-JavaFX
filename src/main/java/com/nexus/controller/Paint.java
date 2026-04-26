@@ -10,7 +10,6 @@ import java.net.URL;
 public class Paint extends Application {
 
 	public static void main(String[] args) {
-		
 		launch(args);
 	}
 
@@ -27,14 +26,20 @@ public class Paint extends Application {
 	    Scene scene = new Scene(root);
 
 	    // Load the CSS similarly
-	    URL cssLocation = getClass().getResource("/css/style.css");
+	    URL cssLocation = getClass().getResource("/css/professional-dark.css");
 	    if (cssLocation != null) {
 	        scene.getStylesheets().add(cssLocation.toExternalForm());
 	    }
 
-	    primaryStage.setTitle("Nexus Board v2.0 - AI-Enhanced Collaborative Drawing");
+	    primaryStage.setTitle("Nexus Board v3.0 - Developer Edition");
 	    primaryStage.setScene(scene);
+	    
+	    // Set window bounds and center
+	    primaryStage.setMinWidth(1024);
+	    primaryStage.setMinHeight(768);
+	    primaryStage.sizeToScene();
+	    primaryStage.centerOnScreen();
+	    
 	    primaryStage.show();
 	}
-
 }

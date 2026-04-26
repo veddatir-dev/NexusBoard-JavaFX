@@ -3,25 +3,20 @@ package com.nexus.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
-public class Rectangle extends Shape {
+public class Rectangle extends Quadrilateral {
+	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void draw(Canvas canvas) {
-		GraphicsContext gc=canvas.getGraphicsContext2D();
-		gc.setStroke(color);
-		gc.setLineWidth(strokeWidth > 0 ? strokeWidth : 2);
+	protected void drawShape(GraphicsContext gc) {
 		double Upperx=Math.min(x2, x1);
 		double Uppery=Math.min(y2,y1);
 		
 		double Width=Math.abs(x2-x1);
 		double Height=Math.abs(y2-y1);
 		
-		if (fillColor != null && !fillColor.equals(Color.TRANSPARENT)) {
-			gc.setFill(fillColor);
+		if (fillA > 0.0) {
 			gc.fillRect(Upperx, Uppery, Width, Height);
 		}
 		gc.strokeRect(Upperx,Uppery,Width,Height);
@@ -34,17 +29,19 @@ public class Rectangle extends Shape {
 		props.put("Uppery",Math.min(y2, y1));
 		props.put("Width", Math.abs(x2-x1));
 		props.put("Height", Math.abs(y2-y1));
-		props.put("r", color.getRed());
-		props.put("g", color.getGreen());
-		props.put("b", color.getBlue());
-		props.put("a", color.getOpacity());
+		props.put("r", r);
+		props.put("g", g);
+		props.put("b", b);
+		props.put("a", a);
 		props.put("strokeWidth", strokeWidth);
-		if (fillColor != null) {
-			props.put("fillR", fillColor.getRed());
-			props.put("fillG", fillColor.getGreen());
-			props.put("fillB", fillColor.getBlue());
-			props.put("fillA", fillColor.getOpacity());
-		}
+		props.put("rotationAngle", rotationAngle);
+		props.put("scaleX", scaleX);
+		props.put("scaleY", scaleY);
+		
+		props.put("fillR", fillR);
+		props.put("fillG", fillG);
+		props.put("fillB", fillB);
+		props.put("fillA", fillA);
 		return props;
 	}
 
@@ -54,18 +51,20 @@ public class Rectangle extends Shape {
 		this.y1=props.get("Uppery");
 		this.x2=props.get("Width")+x1;
 		this.y2=props.get("Height")+y1;
-		double r = props.get("r");
-		double g = props.get("g");
-		double b = props.get("b");
-		double a = props.get("a");
-		this.color = Color.color(r, g, b, a);
+		this.r = props.get("r");
+		this.g = props.get("g");
+		this.b = props.get("b");
+		this.a = props.get("a");
 		this.strokeWidth = props.getOrDefault("strokeWidth", 2.0);
+		this.rotationAngle = props.getOrDefault("rotationAngle", 0.0);
+		this.scaleX = props.getOrDefault("scaleX", 1.0);
+		this.scaleY = props.getOrDefault("scaleY", 1.0);
+		
 		if (props.containsKey("fillR")) {
-			double fillR = props.get("fillR");
-			double fillG = props.get("fillG");
-			double fillB = props.get("fillB");
-			double fillA = props.get("fillA");
-			this.fillColor = Color.color(fillR, fillG, fillB, fillA);
+			this.fillR = props.get("fillR");
+			this.fillG = props.get("fillG");
+			this.fillB = props.get("fillB");
+			this.fillA = props.get("fillA");
 		}
 	}
 	

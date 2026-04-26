@@ -8,226 +8,190 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1400.0" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nexus.controller.FXMLDocumentController">
 
-   <!-- Top Toolbar with Enhanced Controls -->
+   <!-- Top Tab Selector & Global Actions -->
    <top>
-      <VBox styleClass="toolbar" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="toolbar" BorderPane.alignment="CENTER">
          <children>
-            <!-- First Toolbar Row: File, Edit, and Theme -->
-            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="toolbar-content">
-               <children>
-                  <!-- File Operations -->
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label styleClass="section-label" text="File" />
-                        <HBox spacing="5.0">
-                           <children>
-                              <Button fx:id="SaveProjectBtn" mnemonicParsing="false" onAction="#handleSaveProject" styleClass="modern-button" text="💾 Save" minWidth="60.0">
-                                 <tooltip><Tooltip text="Save project file" /></tooltip>
-                              </Button>
-                              <Button fx:id="LoadProjectBtn" mnemonicParsing="false" onAction="#handleLoadProject" styleClass="modern-button" text="📂 Open" minWidth="60.0">
-                                 <tooltip><Tooltip text="Open project file" /></tooltip>
-                              </Button>
-                              <Button fx:id="ExportBtn" mnemonicParsing="false" onAction="#handleExport" styleClass="modern-button" text="📤 Export" minWidth="60.0">
-                                 <tooltip><Tooltip text="Export to image" /></tooltip>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-
-                  <!-- Edit Tools -->
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label styleClass="section-label" text="Edit" />
-                        <HBox spacing="5.0">
-                           <children>
-                              <Button fx:id="UndoBtn" mnemonicParsing="false" onAction="#handleUndo" styleClass="modern-button" text="↶ Undo" minWidth="50.0">
-                                 <tooltip><Tooltip text="Undo last action" /></tooltip>
-                              </Button>
-                              <Button fx:id="RedoBtn" mnemonicParsing="false" onAction="#handleRedo" styleClass="modern-button" text="↷ Redo" minWidth="50.0">
-                                 <tooltip><Tooltip text="Redo last action" /></tooltip>
-                              </Button>
-                              <Button fx:id="ClearBtn" mnemonicParsing="false" onAction="#handleClear" styleClass="modern-button" text="🗑 Clear" minWidth="50.0">
-                                 <tooltip><Tooltip text="Clear all drawings" /></tooltip>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-
-                  <!-- Theme Selector -->
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label styleClass="section-label" text="Theme" />
-                        <ComboBox fx:id="ThemeBox" prefWidth="140.0" promptText="Select Theme" styleClass="modern-combo" />
-                     </children>
-                  </VBox>
-
-                  <!-- Exit Button -->
-                  <Button fx:id="ExitBtn" mnemonicParsing="false" onAction="#handleExit" styleClass="exit-button" text="✕ Exit">
-                     <tooltip><Tooltip text="Exit application" /></tooltip>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-               </padding>
-            </HBox>
-
-            <Separator prefWidth="200.0" />
-
-            <!-- Second Toolbar Row: Drawing Tools -->
-            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="toolbar-content">
-               <children>
-                  <!-- Shape Selection -->
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label styleClass="section-label" text="Shapes" />
-                        <HBox spacing="5.0">
-                           <children>
-                              <ComboBox fx:id="ShapeBox" prefWidth="120.0" promptText="Shape" styleClass="modern-combo" />
-                              <ColorPicker fx:id="ColorBox" prefWidth="50.0" styleClass="modern-color-picker" />
-                              <ColorPicker fx:id="FillColorBox" prefWidth="50.0" styleClass="modern-color-picker" />
-                              <Slider fx:id="StrokeSizeSlider" max="20.0" min="1.0" prefWidth="80.0" styleClass="modern-slider" value="2.0" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-
-                  <!-- New Drawing Tools -->
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label styleClass="section-label" text="Tools" />
-                        <HBox spacing="5.0">
-                           <children>
-                              <Button fx:id="TextBtn" mnemonicParsing="false" onAction="#handleTextTool" styleClass="modern-button" text="📝 Text" minWidth="50.0">
-                                 <tooltip><Tooltip text="Add text to canvas" /></tooltip>
-                              </Button>
-                              <Button fx:id="EraserBtn" mnemonicParsing="false" onAction="#handleEraserTool" styleClass="modern-button" text="🧹 Eraser" minWidth="50.0">
-                                 <tooltip><Tooltip text="Erase parts of drawing" /></tooltip>
-                              </Button>
-                              <Button fx:id="SelectionBtn" mnemonicParsing="false" onAction="#handleSelectionTool" styleClass="modern-button" text="✓ Select" minWidth="50.0">
-                                 <tooltip><Tooltip text="Select shapes" /></tooltip>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-
-                  <!-- Transformation Controls -->
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label styleClass="section-label" text="Transform" />
-                        <HBox spacing="5.0">
-                           <children>
-                              <VBox spacing="2.0" prefWidth="70.0">
-                                 <children>
-                                    <Label styleClass="control-label" text="Rotate" />
-                                    <Slider fx:id="RotationSlider" min="0.0" max="360.0" styleClass="modern-slider" />
-                                 </children>
-                              </VBox>
-                              <VBox spacing="2.0" prefWidth="70.0">
-                                 <children>
-                                    <Label styleClass="control-label" text="Scale" />
-                                    <Slider fx:id="ScaleSlider" min="0.1" max="2.0" value="1.0" styleClass="modern-slider" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-
-                  <!-- Network & AI -->
-                  <VBox spacing="5.0">
-                     <children>
-                        <Label styleClass="section-label" text="Network" />
-                        <HBox spacing="5.0">
-                           <children>
-                              <TextField fx:id="IPField" promptText="IP" prefWidth="100.0" styleClass="modern-text-field" />
-                              <Button fx:id="HostBtn" mnemonicParsing="false" onAction="#handleHost" styleClass="modern-button" text="Host" minWidth="50.0" />
-                              <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#handleConnect" styleClass="modern-button" text="Connect" minWidth="50.0" />
-                              <Button fx:id="AIBtn" mnemonicParsing="false" onAction="#handleAIEnhance" styleClass="modern-button" text="🎨 AI" minWidth="45.0" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-               </padding>
-            </HBox>
+            <Button fx:id="TabWhiteboardBtn" mnemonicParsing="false" onAction="#handleTabSwitch" styleClass="modern-button" text="🎨 Whiteboard" />
+            <Button fx:id="TabCodeBtn" mnemonicParsing="false" onAction="#handleTabSwitch" styleClass="modern-button" text="💻 Code Editor" />
+            <Button fx:id="TabDocBtn" mnemonicParsing="false" onAction="#handleTabSwitch" styleClass="modern-button" text="📄 Document" />
+            <Region HBox.hgrow="ALWAYS" />
+            <!-- Toggle Theme Button -->
+            <ToggleButton fx:id="ThemeToggleBtn" mnemonicParsing="false" onAction="#handleThemeToggle" styleClass="modern-button" text="🌙 Dark Mode" />
+            <Button fx:id="SaveProjectBtn" mnemonicParsing="false" onAction="#handleSaveProject" styleClass="modern-button" text="💾 Save" />
+            <Button fx:id="LoadProjectBtn" mnemonicParsing="false" onAction="#handleLoadProject" styleClass="modern-button" text="📂 Open" />
+            <Button fx:id="ExportBtn" mnemonicParsing="false" onAction="#handleExport" styleClass="modern-button" text="📤 Export" />
          </children>
-      </VBox>
+         <padding>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+         </padding>
+      </HBox>
    </top>
+
+   <!-- Left Sidebar: 60px Drawing Tools Palette -->
+   <left>
+      <VBox alignment="TOP_CENTER" styleClass="sidebar" spacing="15.0" minWidth="60.0" prefWidth="60.0" maxWidth="60.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="SelectionBtn" mnemonicParsing="false" onAction="#handleSelectionTool" styleClass="tool-button" text="👆">
+               <tooltip><Tooltip text="Select" /></tooltip>
+            </Button>
+            <Button fx:id="FreehandBtn" mnemonicParsing="false" onAction="#handleFreehandTool" styleClass="tool-button" text="✏">
+               <tooltip><Tooltip text="Draw" /></tooltip>
+            </Button>
+            <Button fx:id="LineBtn" mnemonicParsing="false" onAction="#handleLineTool" styleClass="tool-button" text="➖">
+               <tooltip><Tooltip text="Line / Connector" /></tooltip>
+            </Button>
+            <Button fx:id="TextBtn" mnemonicParsing="false" onAction="#handleTextTool" styleClass="tool-button" text="T">
+               <tooltip><Tooltip text="Text" /></tooltip>
+            </Button>
+            <Button fx:id="EraserBtn" mnemonicParsing="false" onAction="#handleEraserTool" styleClass="tool-button" text="🧹">
+               <tooltip><Tooltip text="Eraser" /></tooltip>
+            </Button>
+            <Separator />
+            <Label text="Shapes" textFill="#00d4ff" style="-fx-font-size: 10px;"/>
+            <ComboBox fx:id="ShapeSelector" promptText="⭕" styleClass="tool-button" maxWidth="50.0" />
+            <Separator />
+            <Label text="UML" textFill="#00d4ff" style="-fx-font-size: 10px;"/>
+            <!-- Drag-and-drop palette buttons -->
+            <Button fx:id="PaletteClassBtn" mnemonicParsing="false" styleClass="tool-button" text="📄">
+               <tooltip><Tooltip text="UML Class" /></tooltip>
+            </Button>
+            <Button fx:id="PaletteDecisionBtn" mnemonicParsing="false" styleClass="tool-button" text="💠">
+               <tooltip><Tooltip text="Decision" /></tooltip>
+            </Button>
+            <Button fx:id="PaletteActorBtn" mnemonicParsing="false" styleClass="tool-button" text="🧍">
+               <tooltip><Tooltip text="Actor" /></tooltip>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </VBox>
+   </left>
 
    <!-- Center: Canvas with Side Panels -->
    <center>
-      <SplitPane dividerPositions="0.75, 0.85" styleClass="main-split-pane">
+      <SplitPane dividerPositions="0.8" styleClass="main-split-pane">
          <items>
-            <!-- Main Canvas Area -->
-            <AnchorPane styleClass="canvas-container" minHeight="0.0" minWidth="0.0">
-               <children>
-                  <Canvas fx:id="CanvasBox" onMousePressed="#startDrag" onMouseDragged="#whileDragging" onMouseReleased="#endDrag" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </AnchorPane>
+            <!-- Main Content Area with StackPane for Tabs wrapped in ScrollPane -->
+            <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="canvas-scroll-pane">
+                <content>
+                    <StackPane fx:id="TabStackPane" styleClass="canvas-container" minWidth="1200" minHeight="800">
+                       <children>
+                          <!-- Whiteboard Tab -->
+                          <AnchorPane fx:id="WhiteboardTab">
+                             <children>
+                                <Canvas fx:id="CanvasBox" onMousePressed="#startDrag" onMouseDragged="#whileDragging" onMouseReleased="#endDrag" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                <Canvas fx:id="GhostCanvas" mouseTransparent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                             </children>
+                          </AnchorPane>
+                          
+                          <!-- Code Editor Tab -->
+                          <TextArea fx:id="CodeEditorTab" styleClass="modern-text-area" visible="false" />
+                          
+                          <!-- Document Editor Tab -->
+                          <TextArea fx:id="DocEditorTab" styleClass="modern-text-area" visible="false" />
+                       </children>
+                       <padding>
+                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                       </padding>
+                    </StackPane>
+                </content>
+            </ScrollPane>
 
-            <!-- Right Sidebar: Layers and History -->
-            <VBox styleClass="sidebar" spacing="10.0" minWidth="200.0">
-               <children>
-                  <!-- Layers Section -->
-                  <TitledPane animated="false" collapsible="false" text="Layers" textFill="#00d4ff">
-                     <content>
-                        <VBox spacing="5.0">
-                           <children>
-                              <ListView fx:id="LayerList" prefHeight="120.0" styleClass="shape-list" />
-                              <HBox spacing="5.0">
-                                 <children>
-                                    <Button fx:id="AddLayerBtn" mnemonicParsing="false" onAction="#handleAddLayer" styleClass="sidebar-button" text="+" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="DeleteLayerBtn" mnemonicParsing="false" onAction="#handleDeleteLayer" styleClass="sidebar-button" text="-" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="LayerUpBtn" mnemonicParsing="false" onAction="#handleLayerUp" styleClass="sidebar-button" text="↑" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="LayerDownBtn" mnemonicParsing="false" onAction="#handleLayerDown" styleClass="sidebar-button" text="↓" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </content>
-                  </TitledPane>
+            <!-- Right Sidebar: Properties, Layers, Network -->
+            <ScrollPane fitToWidth="true" styleClass="right-sidebar-scroll">
+               <content>
+                <VBox styleClass="sidebar" spacing="10.0" minWidth="240.0">
+                   <children>
+                      <!-- Styling Section -->
+                      <TitledPane animated="false" text="Style" textFill="#00d4ff">
+                          <content>
+                              <VBox spacing="5.0">
+                                  <HBox spacing="10.0">
+                                      <VBox>
+                                          <Label styleClass="control-label" text="Stroke" />
+                                          <ColorPicker fx:id="ColorBox" styleClass="modern-color-picker" />
+                                      </VBox>
+                                      <VBox>
+                                          <Label styleClass="control-label" text="Fill" />
+                                          <ColorPicker fx:id="FillColorBox" styleClass="modern-color-picker" />
+                                      </VBox>
+                                  </HBox>
+                                  <Label styleClass="control-label" text="Stroke Width:" />
+                                  <Slider fx:id="StrokeSizeSlider" max="20.0" min="1.0" value="2.0" styleClass="modern-slider" />
+                              </VBox>
+                          </content>
+                      </TitledPane>
 
-                  <!-- Shape History Section -->
-                  <TitledPane animated="false" collapsible="false" text="Shape History" textFill="#00d4ff">
-                     <content>
-                        <ListView fx:id="ShapeList" prefHeight="120.0" styleClass="shape-list" />
-                     </content>
-                  </TitledPane>
+                      <!-- Transform Section -->
+                      <TitledPane animated="false" text="Transform" textFill="#00d4ff">
+                          <content>
+                              <VBox spacing="5.0">
+                                  <Label styleClass="control-label" text="Scale:" />
+                                  <Slider fx:id="ScaleSlider" max="5.0" min="0.1" value="1.0" styleClass="modern-slider" />
+                                  <Label styleClass="control-label" text="Rotation:" />
+                                  <Slider fx:id="RotationSlider" max="360.0" min="0.0" value="0.0" styleClass="modern-slider" />
+                                  <Label styleClass="control-label" text="Translate X:" />
+                                  <Slider fx:id="TranslateXSlider" max="500.0" min="-500.0" value="0.0" styleClass="modern-slider" />
+                                  <Label styleClass="control-label" text="Translate Y:" />
+                                  <Slider fx:id="TranslateYSlider" max="500.0" min="-500.0" value="0.0" styleClass="modern-slider" />
+                              </VBox>
+                          </content>
+                      </TitledPane>
 
-                  <!-- Transform Options -->
-                  <TitledPane animated="false" collapsible="false" text="Selected Shape" textFill="#00d4ff">
-                     <content>
-                        <VBox spacing="8.0">
-                           <children>
-                              <HBox spacing="5.0">
-                                 <children>
-                                    <Button fx:id="MoveBtn" mnemonicParsing="false" onAction="#handleButtonAction" styleClass="sidebar-button" text="Move" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="CopyBtn" mnemonicParsing="false" onAction="#handleButtonAction" styleClass="sidebar-button" text="Copy" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                              <HBox spacing="5.0">
-                                 <children>
-                                    <Button fx:id="ResizeBtn" mnemonicParsing="false" onAction="#handleButtonAction" styleClass="sidebar-button" text="Resize" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="DeleteShapeBtn" mnemonicParsing="false" onAction="#handleDeleteShape" styleClass="sidebar-button" text="Delete" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </content>
-                  </TitledPane>
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </VBox>
+                      <!-- Layers Section -->
+                      <TitledPane animated="false" text="Layers" textFill="#00d4ff">
+                         <content>
+                            <VBox spacing="5.0">
+                               <children>
+                                  <ListView fx:id="LayerList" prefHeight="120.0" styleClass="shape-list" />
+                                  <HBox spacing="5.0">
+                                     <children>
+                                        <Button fx:id="AddLayerBtn" mnemonicParsing="false" onAction="#handleAddLayer" styleClass="sidebar-button" text="+" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="DeleteLayerBtn" mnemonicParsing="false" onAction="#handleDeleteLayer" styleClass="sidebar-button" text="-" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="LayerUpBtn" mnemonicParsing="false" onAction="#handleLayerUp" styleClass="sidebar-button" text="↑" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="LayerDownBtn" mnemonicParsing="false" onAction="#handleLayerDown" styleClass="sidebar-button" text="↓" HBox.hgrow="ALWAYS" />
+                                     </children>
+                                  </HBox>
+                               </children>
+                            </VBox>
+                         </content>
+                      </TitledPane>
+
+                      <!-- Network Section -->
+                      <TitledPane animated="false" text="Network" textFill="#00d4ff">
+                          <content>
+                              <VBox spacing="5.0">
+                                  <Label styleClass="control-label" text="Network IP:" />
+                                  <TextField fx:id="IPField" promptText="IP Address" styleClass="modern-text-field" />
+                                  <Label styleClass="control-label" text="Port:" />
+                                  <TextField fx:id="PortField" promptText="5000" text="5000" styleClass="modern-text-field" />
+                                  <HBox spacing="5.0">
+                                      <Button fx:id="HostBtn" mnemonicParsing="false" onAction="#handleHost" styleClass="sidebar-button" text="Host" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+                                      <Button fx:id="ConnectBtn" mnemonicParsing="false" onAction="#handleConnect" styleClass="sidebar-button" text="Connect" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+                                  </HBox>
+                              </VBox>
+                          </content>
+                      </TitledPane>
+
+                      <!-- Actions -->
+                      <TitledPane animated="false" text="Actions" textFill="#00d4ff">
+                          <content>
+                              <VBox spacing="5.0">
+                                  <Button fx:id="AIBtn" mnemonicParsing="false" onAction="#handleAIEnhance" styleClass="sidebar-button" text="🎨 AI Enhance" maxWidth="Infinity"/>
+                                  <Button fx:id="ClearBtn" mnemonicParsing="false" onAction="#handleClear" styleClass="sidebar-button" text="🗑 Clear Canvas" maxWidth="Infinity" />
+                              </VBox>
+                          </content>
+                      </TitledPane>
+
+                   </children>
+                   <padding>
+                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                   </padding>
+                </VBox>
+               </content>
+            </ScrollPane>
          </items>
       </SplitPane>
    </center>
@@ -236,7 +200,7 @@
    <bottom>
       <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="status-bar">
          <children>
-            <Label fx:id="StatusLabel" styleClass="status-text" text="Ready - Nexus Board v3.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="StatusLabel" styleClass="status-text" text="Ready - Nexus Board v3.0 Professional" HBox.hgrow="ALWAYS" />
             <Label styleClass="status-info" text="Zoom: 100%" />
             <Label styleClass="status-info" text="Layers: 1" />
          </children>

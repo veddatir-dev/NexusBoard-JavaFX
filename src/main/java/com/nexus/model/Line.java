@@ -3,17 +3,13 @@ package com.nexus.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public class Line extends Shape {
+	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void draw(Canvas canvas) {
-		GraphicsContext gc=canvas.getGraphicsContext2D();
-		gc.setStroke(color);
-		gc.setLineWidth(strokeWidth > 0 ? strokeWidth : 2);
+	protected void drawShape(GraphicsContext gc) {
 		gc.strokeLine(x1, y1, x2, y2);
 	}
 
@@ -24,11 +20,14 @@ public class Line extends Shape {
 		props.put("y1", y1);
 		props.put("x2", x2);
 		props.put("y2", y2);
-		props.put("r", color.getRed());
-		props.put("g", color.getGreen());
-		props.put("b", color.getBlue());
-		props.put("a", color.getOpacity());
+		props.put("r", r);
+		props.put("g", g);
+		props.put("b", b);
+		props.put("a", a);
 		props.put("strokeWidth", strokeWidth);
+		props.put("rotationAngle", rotationAngle);
+		props.put("scaleX", scaleX);
+		props.put("scaleY", scaleY);
 		return props;
 	}
 
@@ -38,12 +37,14 @@ public class Line extends Shape {
 		this.y1=props.get("y1");
 		this.x2=props.get("x2");
 		this.y2=props.get("y2");
-		double r = props.get("r");
-		double g = props.get("g");
-		double b = props.get("b");
-		double a = props.get("a");
-		this.color = Color.color(r, g, b, a);
+		this.r = props.get("r");
+		this.g = props.get("g");
+		this.b = props.get("b");
+		this.a = props.get("a");
 		this.strokeWidth = props.getOrDefault("strokeWidth", 2.0);
+		this.rotationAngle = props.getOrDefault("rotationAngle", 0.0);
+		this.scaleX = props.getOrDefault("scaleX", 1.0);
+		this.scaleY = props.getOrDefault("scaleY", 1.0);
 	}
 	
 }

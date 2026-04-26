@@ -30,7 +30,7 @@ Both commands should return version information without errors.
 cd C:\Eclipse-workspace\Board
 
 # Run the build script
-.\build-executable.ps1
+Mi
 ```
 
 ### Option 2: Using Batch Script (Windows)

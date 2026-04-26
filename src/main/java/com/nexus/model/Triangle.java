@@ -1,61 +1,31 @@
 package com.nexus.model;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.scene.paint.Color;
 
-public class Triangle extends Shape {
-
-    @Override
-    public void draw(Canvas canvas) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setStroke(color);
-
-        // Calculate the three corners
-        double topX = (x1 + x2) / 2;
-        double topY = y1;
-        double bottomLeftX = x1;
-        double bottomLeftY = y2;
-        double bottomRightX = x2;
-        double bottomRightY = y2;
-
-        // Draw the path (Triangle)
-        gc.setLineWidth(strokeWidth > 0 ? strokeWidth : 2);
-        gc.beginPath();
-        gc.moveTo(topX, topY);          // Start at the top
-        gc.lineTo(bottomLeftX, bottomLeftY); // Draw down to the left
-        gc.lineTo(bottomRightX, bottomRightY); // Draw across the base
-        gc.lineTo(topX, topY);          // Close back to the top
-        
-        if (fillColor != null && !fillColor.equals(Color.TRANSPARENT)) {
-            gc.setFill(fillColor);
-            gc.fill();
-        }
-        gc.stroke();
-        gc.closePath();
-    }
+public abstract class Triangle extends Shape {
+	private static final long serialVersionUID = 1L;
 
     @Override
     public Map<String, Double> getProperties() {
         Map<String, Double> props = new HashMap<>();
-        // Even for a triangle, we only need two points to define this shape!
         props.put("x1", x1);
         props.put("y1", y1);
         props.put("x2", x2);
         props.put("y2", y2);
-        props.put("r", color.getRed());
-        props.put("g", color.getGreen());
-        props.put("b", color.getBlue());
-        props.put("a", color.getOpacity());
+        props.put("r", r);
+        props.put("g", g);
+        props.put("b", b);
+        props.put("a", a);
         props.put("strokeWidth", strokeWidth);
-        if (fillColor != null) {
-            props.put("fillR", fillColor.getRed());
-            props.put("fillG", fillColor.getGreen());
-            props.put("fillB", fillColor.getBlue());
-            props.put("fillA", fillColor.getOpacity());
-        }
+		props.put("rotationAngle", rotationAngle);
+		props.put("scaleX", scaleX);
+		props.put("scaleY", scaleY);
+        
+        props.put("fillR", fillR);
+        props.put("fillG", fillG);
+        props.put("fillB", fillB);
+        props.put("fillA", fillA);
         return props;
     }
 
@@ -65,18 +35,20 @@ public class Triangle extends Shape {
         this.y1 = props.get("y1");
         this.x2 = props.get("x2");
         this.y2 = props.get("y2");
-        double r = props.get("r");
-        double g = props.get("g");
-        double b = props.get("b");
-        double a = props.get("a");
-        this.color = Color.color(r, g, b, a);
+        this.r = props.get("r");
+        this.g = props.get("g");
+        this.b = props.get("b");
+        this.a = props.get("a");
         this.strokeWidth = props.getOrDefault("strokeWidth", 2.0);
+		this.rotationAngle = props.getOrDefault("rotationAngle", 0.0);
+		this.scaleX = props.getOrDefault("scaleX", 1.0);
+		this.scaleY = props.getOrDefault("scaleY", 1.0);
+        
         if (props.containsKey("fillR")) {
-            double fillR = props.get("fillR");
-            double fillG = props.get("fillG");
-            double fillB = props.get("fillB");
-            double fillA = props.get("fillA");
-            this.fillColor = Color.color(fillR, fillG, fillB, fillA);
+            this.fillR = props.get("fillR");
+            this.fillG = props.get("fillG");
+            this.fillB = props.get("fillB");
+            this.fillA = props.get("fillA");
         }
     }
 }

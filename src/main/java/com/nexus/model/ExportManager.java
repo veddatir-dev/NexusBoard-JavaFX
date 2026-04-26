@@ -135,8 +135,73 @@ public class ExportManager {
                 return ".bmp";
             case "svg":
                 return ".svg";
+            case "ppt":
+            case "pptx":
+                return ".pptx";
             default:
                 return ".png";
         }
+    }
+
+    /**
+     * Export canvas to a PowerPoint (PPTX) slide
+     */
+    public static void exportToPPT(Canvas canvas, String filePath) throws IOException {
+        try (org.apache.poi.xslf.usermodel.XMLSlideShow ppt = new org.apache.poi.xslf.usermodel.XMLSlideShow()) {
+            org.apache.poi.xslf.usermodel.XSLFSlide slide = ppt.createSlide();
+            
+            // Convert Canvas to PNG bytes
+            WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
+            canvas.snapshot(null, writableImage);
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
+            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+            byte[] pictureData = baos.toByteArray();
+            
+            // Add picture to PPT
+            org.apache.poi.xslf.usermodel.XSLFPictureData pd = ppt.addPicture(pictureData, org.apache.poi.sl.usermodel.PictureData.PictureType.PNG);
+            slide.createPicture(pd);
+            
+            // Save
+            try (java.io.FileOutputStream out = new java.io.FileOutputStream(filePath)) {
+                ppt.write(out);
+            }
+        }
+    }
+
+    /**
+     * Batch export each visible layer as a separate image
+     */
+    public static void batchExportLayersToImages(Canvas canvas, LayerManager layerManager, String directoryPath, String format) throws IOException {
+        File dir = new File(directoryPath);
+        if (!dir.exists()) dir.mkdirs();
+        
+        javafx.scene.canvas.GraphicsContext gc = canvas.getGraphicsContext2D();
+        
+        for (Layer layer : layerManager.getAllLayers()) {
+            if (!layer.isVisible()) continue;
+            
+            // Clear canvas and draw only this layer
+            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            layer.setOpacity(1.0); // Ensure full opacity for the export
+            for (iShape shape : layer.getShapes()) {
+                shape.draw(canvas);
+            }
+            
+            String safeName = layer.getName().replaceAll("[^a-zA-Z0-9.-]", "_");
+            String filePath = directoryPath + File.separator + safeName + getExtensionForFormat(format);
+            
+            if (format.equalsIgnoreCase("png")) {
+                exportToPNG(canvas, filePath);
+            } else if (format.equalsIgnoreCase("jpeg") || format.equalsIgnoreCase("jpg")) {
+                exportToJPEG(canvas, filePath);
+            } else if (format.equalsIgnoreCase("bmp")) {
+                exportToBMP(canvas, filePath);
+            }
+        }
+        
+        // Restore canvas by drawing all visible layers
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        layerManager.drawAllLayers(canvas);
     }
 }

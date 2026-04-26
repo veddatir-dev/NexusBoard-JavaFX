@@ -6,10 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class Arrow extends Line {
 
     @Override
-    public void draw(Canvas canvas) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setStroke(color);
-        gc.setLineWidth(strokeWidth > 0 ? strokeWidth : 2);
+    protected void drawShape(GraphicsContext gc) {
         gc.strokeLine(x1, y1, x2, y2);
 
         // Draw arrowhead

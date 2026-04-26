@@ -1,6 +1,5 @@
 package com.nexus.model;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.geometry.Bounds;
@@ -8,11 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SelectionBox extends Shape {
+	private static final long serialVersionUID = 1L;
     private boolean isActive;
     private iShape selectedShape;
 
     public SelectionBox() {
-        this.color = Color.web("#0066CC");
+        // #0066CC is RGB 0, 102, 204
+        this.r = 0.0;
+        this.g = 102.0 / 255.0;
+        this.b = 204.0 / 255.0;
+        this.a = 1.0;
         this.strokeWidth = 2.0;
         this.isActive = false;
     }
@@ -36,12 +40,9 @@ public class SelectionBox extends Shape {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    protected void drawShape(GraphicsContext gc) {
         if (!isActive || selectedShape == null) return;
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setStroke(color);
-        gc.setLineWidth(strokeWidth);
         gc.setLineDashes(5);
         
         // Draw selection box around the shape bounds
@@ -49,7 +50,7 @@ public class SelectionBox extends Shape {
         
         // Draw resize handles at corners
         double handleSize = 8;
-        gc.setFill(color);
+        gc.setFill(getColor());
         gc.fillRect(x1 - handleSize / 2, y1 - handleSize / 2, handleSize, handleSize);
         gc.fillRect(x2 - handleSize / 2, y1 - handleSize / 2, handleSize, handleSize);
         gc.fillRect(x1 - handleSize / 2, y2 - handleSize / 2, handleSize, handleSize);
